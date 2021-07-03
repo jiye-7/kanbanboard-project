@@ -10,6 +10,31 @@ const Container = styled.div`
   display: flex;
 `;
 
+class InnerList extends React.PureComponent {
+  // 어떤 소품도 바뀌지 않으면 조건부로 렌더링을 차단할 수 있다.
+  // 순수 구성 요소에서 확장되도록 구성 요소를 변경할 수 있습니다.
+  // 순수 구성 요소는 여기에 있는 구성 요소 업데이트 확인과 동일한 작업을 수행합니다.
+
+  /* shouldComponentUpdate(nextProps) {
+    // 이 세 가지 속성 중 어느것도 드래그 도중 바뀌면 안 된다.
+    if (
+      nextProps.column === this.props.column &&
+      nextProps.taskMap === this.props.taskMap &&
+      nextProps.index === this.props.index
+    ) {
+      return false;
+    }
+    return true;
+  } */
+
+  render() {
+    const { column, taskMap, index } = this.props;
+    const tasks = column.taskIds.map((taskId) => taskMap[taskId]);
+
+    return <Column column={column} tasks={tasks} index={index} />;
+  }
+}
+
 class App extends React.Component {
   state = initialData;
 
@@ -147,9 +172,11 @@ class App extends React.Component {
             <Container {...provided.droppableProps} ref={provided.innerRef}>
               {this.state.columnOrder.map((columnId, index) => {
                 const column = this.state.columns[columnId];
-                const tasks = column.taskIds.map(
+                /*
+                컬럼 구성요소와 마찬가지로 드래그 도중 드롭할 수 있는 컨테이너의 하위 항목이 렌더링 되지 않도록 하기 위해 이 코드는 지운다.
+                 const tasks = column.taskIds.map(
                   (taskId) => this.state.tasks[taskId]
-                );
+                ); */
 
                 // 작업을 작업관리에서 진행 중으로 이동할 수 있지만 더 이상 진행 중인 작업에서 작업관리로 이동할 수 없다.
                 // 작업을 진행 중에서 완료로만 이동할 수 있다.
@@ -157,10 +184,10 @@ class App extends React.Component {
                 // const isDropDisabled = index < this.state.homeIndex;
 
                 return (
-                  <Column
+                  <InnerList
                     key={column.id}
                     column={column}
-                    tasks={tasks}
+                    taskMap={this.state.tasks}
                     index={index}
                     // isDropDisabled={isDropDisabled}
                   />
