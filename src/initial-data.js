@@ -1,9 +1,12 @@
 const initialData = {
   tasks: {
-    'task-1': { id: 'task-1', content: 'Take out the garbage' },
-    'task-2': { id: 'task-2', content: 'Watch my favorite show' },
-    'task-3': { id: 'task-3', content: 'Charge my phone' },
-    'task-4': { id: 'task-4', content: 'Cook dinner' },
+    'task-1': { id: 'task-1', content: 'ToDoList 레이아웃 만들기' },
+    'task-2': { id: 'task-2', content: 'Drag&Drop 기능 구현하기' },
+    'task-3': { id: 'task-3', content: '여러개의 column 만들기' },
+    'task-4': {
+      id: 'task-4',
+      content: '여러개의 column Drag&Drop 기능 구현하기',
+    },
   },
   columns: {
     'column-1': {

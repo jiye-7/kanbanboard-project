@@ -18,7 +18,7 @@ class App extends React.Component {
     }
 
     // 드래그한 위치가 변경되었는 지 확인, 드래그하는 대상 id가 소스와 동일한지? 인덱스가 동일한지 확인
-    // 두 가지가 사실이면 사용자가 항목을 다시 시작된 위치르 끌어다 놓기 때문에 아무것도 하지 않는다.
+    // 두 가지가 사실이면 사용자가 항목을 다시 시작된 위치를 끌어다 놓기 때문에 아무것도 하지 않는다.
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
