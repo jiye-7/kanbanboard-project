@@ -8,6 +8,9 @@ const Container = styled.div`
   border: 1px solid #d1c4e9;
   border-radius: 0.3rem;
   background-color: #d1c4e9;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Title = styled.h3`
@@ -21,6 +24,8 @@ const TaskList = styled.div`
   transition: background-color 0.3s ease;
   background-color: ${(props) =>
     props.isDraggingOver ? '#ba68c8' : '#ede7f6'};
+  flex-grow: 1;
+  min-height: 100px;
 `;
 
 export default class Column extends React.Component {
