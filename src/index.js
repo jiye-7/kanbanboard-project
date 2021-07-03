@@ -13,28 +13,21 @@ const Container = styled.div`
 class App extends React.Component {
   state = initialData;
 
-  /*
-  DragDropContext 콜백 기능을 사용하여 일부 글로벌 스타일을 업데이트하는 꽤 의도된 코드 
-  일반적으로 이러한 콜백에서 애플리케이션에 대한 스타일을 업데이트하지 않으며 스냅샷 값에 의존한다 */
+  // 끌기 시작하는 열의 인덱스를 캡쳐하기 위해 onDragStart를 만든다.
+  onDragStart = (start) => {
+    const homeIndex = this.state.columnOrder.indexOf(start.source.droppableId);
 
-  /*   onDragStart = () => {
-    document.body.style.color = '#5e35b1';
-    document.body.style.transition = 'background-color 0.3s ease';
-  }; */
-
-  /*   onDragUpdate = (update) => {
-    const { destination } = update;
-    const opacity = destination
-      ? destination.index / Object.keys(this.state.tasks).length
-      : 0;
-    document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity}`;
-  }; */
+    this.setState({
+      homeIndex,
+    });
+  };
 
   // reorder our column
   onDragEnd = (result) => {
-    /*     끌기가 완료되면 텍스트 색 변경
-    document.body.style.color = 'inherit';
-    document.body.style.backgroundColor = 'inherit'; */
+    // 인덱스를 구성 요소 상태로 기록, 여기 있는 동안 끌기가 완료되면 이 인덱스를 지운다. (이전 컬럼으로 돌아갈 수 없음)
+    this.setState({
+      homeIndex: null,
+    });
 
     const { destination, source, draggableId } = result;
 
@@ -121,15 +114,27 @@ class App extends React.Component {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
+      <DragDropContext
+        onDragStart={this.onDragStart}
+        onDragEnd={this.onDragEnd}
+      >
         <Container>
-          {this.state.columnOrder.map((columnId) => {
+          {this.state.columnOrder.map((columnId, index) => {
             const column = this.state.columns[columnId];
             const tasks = column.taskIds.map(
               (taskId) => this.state.tasks[taskId]
             );
 
-            return <Column key={column.id} column={column} tasks={tasks} />;
+            const isDropDisabled = index < this.state.homeIndex;
+
+            return (
+              <Column
+                key={column.id}
+                column={column}
+                tasks={tasks}
+                isDropDisabled={isDropDisabled}
+              />
+            );
           })}
         </Container>
       </DragDropContext>
