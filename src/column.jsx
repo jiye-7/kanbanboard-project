@@ -15,7 +15,7 @@ const Title = styled.h3`
 `;
 
 const TaskList = styled.div`
-  padding: 0.5rem;
+  padding: 0.1rem;
   border-radius: 0.3rem;
   margin: 0.2rem 0.2rem;
   transition: background-color 0.3s ease;
