@@ -20,7 +20,7 @@ const TaskList = styled.div`
   margin: 0.2rem 0.2rem;
   transition: background-color 0.3s ease;
   background-color: ${(props) =>
-    props.isDraggingOver ? '#6a1b9a' : '#ede7f6'};
+    props.isDraggingOver ? '#ba68c8' : '#ede7f6'};
 `;
 
 export default class Column extends React.Component {

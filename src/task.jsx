@@ -7,9 +7,9 @@ const Container = styled.div`
   border-radius: 0.3rem;
   padding: 0.5rem;
   margin: 0.5rem;
-  color: #5e35b1;
   font-weight: bold;
-  background-color: ${(props) => (props.isDragging ? '#9fa8da' : '#9575cd')};
+  color: ${(props) => (props.isDragging ? '#fff' : '#5e35b1')};
+  background-color: ${(props) => (props.isDragging ? '#4a148c' : '#9575cd')};
 `;
 
 export default class Task extends React.Component {

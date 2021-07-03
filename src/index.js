@@ -8,8 +8,29 @@ import Column from './column';
 class App extends React.Component {
   state = initialData;
 
+  /*
+  DragDropContext 콜백 기능을 사용하여 일부 글로벌 스타일을 업데이트하는 꽤 의도된 코드 
+  일반적으로 이러한 콜백에서 애플리케이션에 대한 스타일을 업데이트하지 않으며 스냅샷 값에 의존한다 */
+
+  /*   onDragStart = () => {
+    document.body.style.color = '#5e35b1';
+    document.body.style.transition = 'background-color 0.3s ease';
+  }; */
+
+  /*   onDragUpdate = (update) => {
+    const { destination } = update;
+    const opacity = destination
+      ? destination.index / Object.keys(this.state.tasks).length
+      : 0;
+    document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity}`;
+  }; */
+
+  // reorder our column
   onDragEnd = (result) => {
-    // TODO: reorder our column
+    /*     끌기가 완료되면 텍스트 색 변경
+    document.body.style.color = 'inherit';
+    document.body.style.backgroundColor = 'inherit'; */
+
     const { destination, source, draggableId } = result;
 
     // 드래그를 했을 때, 결과가 없다면 아무것도 하지 않는다.

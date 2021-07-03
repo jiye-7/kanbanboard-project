@@ -22,5 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# example js
 example-result.js
 example-snapshot.js
+example-hooks.js
